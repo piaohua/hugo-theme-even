@@ -82,7 +82,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '{{ .Date }}',
+        id: location.pathname,
         title: '{{ .Title }}',
         clientID: '{{ .Site.Params.gitalk.clientId }}',
         clientSecret: '{{ .Site.Params.gitalk.clientSecret }}',
@@ -114,11 +114,11 @@
         el: '#vcomments' ,
         appId: '{{ .Site.Params.valine.appId }}',
         appKey: '{{ .Site.Params.valine.appKey }}',
-        notify: {{ .Site.Params.valine.notify }},
-        verify: {{ .Site.Params.valine.verify }},
-        avatar:'{{ .Site.Params.valine.avatar }}',
+        notify: '{{ .Site.Params.valine.notify }}',
+        verify: '{{ .Site.Params.valine.verify }}',
+        avatar: '{{ .Site.Params.valine.avatar }}',
         placeholder: '{{ .Site.Params.valine.placeholder }}',
-        visitor: {{ .Site.Params.valine.visitor }}
+        visitor: '{{ .Site.Params.valine.visitor }}'
     });
   </script>
   {{- end }}
@@ -133,6 +133,25 @@
             async>
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+  {{- end }}
+
+  <!-- giscus app -->
+  {{- if .Site.Params.giscus.owner}}
+    <script src="https://giscus.app/client.js"
+            data-repo="{{ .Site.Params.giscus.owner }}/{{ .Site.Params.giscus.repo }}"
+            data-repo-id="{{ .Site.Params.giscus.repoId }}"
+            data-category="{{ .Site.Params.giscus.category }}"
+            data-category-id="{{ .Site.Params.giscus.categoryId }}"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+    </script>
   {{- end }}
 
 {{- end }}
